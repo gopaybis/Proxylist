@@ -1,4 +1,4 @@
-name: Update Proxy IP Status21
+name: Update Proxy IP Status keun
 
 on:
   schedule:
@@ -23,28 +23,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
 
-    - name: Debugging: Check file structure
-      run: |
-        ls -alh  # Melihat struktur folder di runner
-        python --version  # Memastikan Python tersedia
-        python -m pip show requests  # Memastikan dependencies terinstal
-
     - name: Update proxy status
       env:
-        IP_FILE: 'proxy_list.csv'  # Ganti dengan nama file input proxy kamu
-        API_URL: 'https://proxyip-check.vercel.app/{ip}:{port}'  # Ganti dengan API endpoint yang kamu pakai
+        IP_FILE: 'proxy_list.csv'
+        API_URL: 'https://proxyip-check.vercel.app/{ip}:{port}'
       run: |
-        python scripts/update_proxy_status.py  # Path yang benar jika ada di folder 'scripts'
+        python scripts/update_proxy_status.py  # Pastikan path ini benar
 
     - name: Commit and push changes
       run: |
         git config --local user.name "github-actions[bot]"
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git add proxy_list.csv  # Menambahkan file proxy yang diperbarui
-        git add error.txt  # Menambahkan file error log
-        git add kvProxylist.json  # Menambahkan file kvProxylist.json
-        git add alive_proxies_grouped.json  # Menambahkan file alive_proxies_grouped.json
-        git add active_proxies.csv  # Menambahkan file active_proxies.csv
+        git add proxy_list.csv
+        git add error.txt
+        git add kvProxylist.json
+        git add alive_proxies_grouped.json
+        git add active_proxies.csv
         if git diff --cached --exit-code; then
           echo "No changes to commit"
         else
