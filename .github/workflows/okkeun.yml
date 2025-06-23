@@ -28,7 +28,7 @@ jobs:
         IP_FILE: 'proxy_list.csv'
         API_URL: 'https://proxyip-check.vercel.app/{ip}:{port}'
       run: |
-        python scripts/update_proxy_status.py  # Pastikan path ini benar
+        python update_proxy_status.py  # Pastikan path ini benar
 
     - name: Commit and push changes
       run: |
