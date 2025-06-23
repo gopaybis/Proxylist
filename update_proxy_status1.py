@@ -36,7 +36,7 @@ def check_proxy_single(ip, port, api_url_template):
         return (None, None, None, None, error_message)
 
 
-def generate_kv_proxylist_json(proxy_data, output_file='kvProxylist.json'):
+def generate_kv_proxylist_json(proxy_data, output_file='kvProxylistup.json'):
     """
     Mengelompokkan proxy hidup berdasarkan country code (CC),
     dan menyimpan dalam format { "CC": [list of proxies] }.
@@ -58,7 +58,7 @@ def generate_kv_proxylist_json(proxy_data, output_file='kvProxylist.json'):
         print(f"Error saat menyimpan file JSON: {e}")
 
 
-def save_active_proxies_to_csv(proxy_data, output_file='active_proxies.csv'):
+def save_active_proxies_to_csv(proxy_data, output_file='active_proxies1.csv'):
     """
     Menyimpan proxy yang aktif ke dalam file CSV dengan format: ip, port, cc, isp
     """
@@ -75,7 +75,7 @@ def save_active_proxies_to_csv(proxy_data, output_file='active_proxies.csv'):
 
 def main():
     input_file = os.getenv('IP_FILE', 'totalproxylist1.txt')  # File input (default)
-    output_file = 'totalproxylist.tmp'  # File output sementara
+    output_file = 'totalproxylist1.tmp'  # File output sementara
     error_file = 'error.txt'  # File untuk error
     api_url_template = os.getenv('API_URL', 'https://proxyip-check.vercel.app/{ip}:{port}')
 
@@ -138,8 +138,8 @@ def main():
         print(f"Error menggantikan {input_file}: {e}")
 
     # Buat dua file JSON berdasarkan pengelompokan
-    generate_kv_proxylist_json(alive_proxies)  # Menyimpan ke kvProxylist.json
-    save_active_proxies_to_csv(alive_proxies)  # Menyimpan ke active_proxies.csv
+    generate_kv_proxylist_json(alive_proxies)  # Menyimpan ke kvProxylistup.json
+    save_active_proxies_to_csv(alive_proxies)  # Menyimpan ke active_proxies1.csv
 
 
 if __name__ == "__main__":
