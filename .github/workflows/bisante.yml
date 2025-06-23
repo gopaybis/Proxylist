@@ -1,4 +1,4 @@
-name: Update Proxy IP Status
+name: Update Proxy IP Statusbisa
 
 on:
   schedule:
